@@ -1,0 +1,52 @@
+-----+
+| users | CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_email` varchar(1000) NOT NULL,
+  `user_password` varchar(1000) NOT NULL,
+  `user_firstname` varchar(1000) NOT NULL,
+  `user_lastname` varchar(1000) NOT NULL,
+  `user_address` varchar(1000) NOT NULL,
+  `user_phnno` varchar(11) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1 |
+
+
+| admin | CREATE TABLE `admin` (
+  `admin_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `admin_username` varchar(500) NOT NULL DEFAULT '',
+  `admin_password` varchar(500) NOT NULL DEFAULT '',
+  PRIMARY KEY (`admin_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 |
+
+
+
+| orderdetails | CREATE TABLE `orderdetails` (
+  `order_id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `item_id` int(10) DEFAULT NULL,
+  `order_name` varchar(1000) DEFAULT NULL,
+  `order_price` double DEFAULT NULL,
+  `order_quantity` int(10) DEFAULT NULL,
+  `order_total` double DEFAULT NULL,
+  `order_status` varchar(45) DEFAULT NULL,
+  `order_date` date DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `orderdetails_ibfk_1` (`user_id`),
+  KEY `orderdetails_ibfk_2` (`item_id`),
+  CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`
+user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`
+item_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1 |
+
+
+
+| items | CREATE TABLE `items` (
+  `item_id` int(10) NOT NULL AUTO_INCREMENT,
+  `item_name` varchar(5000) NOT NULL DEFAULT '',
+  `item_price` double DEFAULT NULL,
+  `item_image` varchar(5000) NOT NULL DEFAULT '',
+  `item_date` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`item_id`),
+  KEY `item_id` (`item_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1 |
